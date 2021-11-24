@@ -11,6 +11,8 @@ body {
     padding: 0 10vw;
     height: 100vh;
     font-family: 'Outfit', sans-serif;
+    display: flex;
+    justify-content: center;
 }
 
 h1, h2, h3, h4 {
@@ -66,14 +68,15 @@ input {
 
 /*List Container*/
 #pokedex-list {
-    max-width: 800px;
     width: 100%;
 }
 
 /*Search*/
 #search-bar-container {
     margin: 40px 10px;
+    height: 50px;
 }
+
 #start-search-button {
     background-color: #FF5350;
     height: 40px;
