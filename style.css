@@ -66,6 +66,10 @@ input {
     margin: 5px;
 }
 
+.hide {
+    display: none !important;
+}
+
 /*List Container*/
 #pokedex-list {
     width: 100%;
@@ -101,7 +105,7 @@ input {
 
 .pokemon-render-result-container {
     flex: 1;
-    min-width: 200px;
+    min-width: 180px;
     margin: 10px;
     margin-top: 60px;
     padding-top: 50px;
@@ -121,7 +125,7 @@ input {
 
 /*Current Pokemon*/
 #current-pokemon-container {
-    width: 300px;
+    width: 350px;
     margin: 10px;
     margin-top: 150px;
 }
