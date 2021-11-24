@@ -1,8 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Outfit', sans-serif;
 }
 
 body {
     background: #F6F8FC;
+    padding: 0 10vw;
+    height: 100vh;
+    font-family: 'Outfit', sans-serif;
+}
+
+h1, h2, h3, h4 {
+    color: #011030;
+    margin: 5px;
+}
+
+span {
+    color: #8F9396;
+}
+
+.font-size-12 {
+    font-size: 12px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.container {
+    border-radius: 20px;
+    box-shadow: #EDEDED 0 10px 10px;
+    padding: 15px;
+    background-color: white;
+}
+
+input {
+    border: none;
+    outline: none;
+    font-size: 18px;
+    flex: 1
+}
+
+.margin-5 {
+    margin: 5px;
+}
+
+/*List Container*/
+#pokedex-list {
+    max-width: 800px;
+    width: 100%;
+}
+
+/*Search*/
+#search-bar-container {
+    margin: 40px 10px;
+}
+#start-search-button {
+    background-color: #FF5350;
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: #ff535088 5px 5px 15px;
+    color: white;
+    font-size: 18px;
+}
+
+#start-search-button:hover {
+    opacity: 0.8;
+    box-shadow: #ff53509c 3px 3px 13px;
+}
+
+/*Render search results*/
+#pokedex-list-render-container {
+    display: flex;
+    flex-flow: wrap row;
+}
+
+.pokemon-render-result-container {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+    margin-top: 60px;
+    padding-top: 50px;
+    position: relative;
+    cursor: pointer;
+    border: 2px solid white;
+}
+
+.pokemon-render-result-container:hover {
+    border: 2px solid #AAC6FF;
+}
+
+.search-pokemon-image {
+    position: absolute;
+    bottom: 90px;
+}
+
+/*Current Pokemon*/
+#current-pokemon-container {
+    width: 300px;
+    margin: 10px;
+    margin-top: 150px;
 }
