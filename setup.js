@@ -3,7 +3,30 @@ let maxPokemonIdToShow = 30
 let currentlyShowingAmount = 0
 let allPokemonNames = []
 
-async function loadAllNames(){
+const typeColors = {
+    'normal':'#BCBCAC',
+    'fighting':'#BC5442',
+    'flying':'#669AFF',
+    'poison':'#AB549A',
+    'ground':'#DEBC54',
+    'rock':'#BCAC66',
+    'bug':'#ABBC1C',
+    'ghost':'#6666BC',
+    'steel':'#ABACBC',
+    'fire':'#FF421C',
+    'water':'#2F9AFF',
+    'grass':'#78CD54',
+    'electric':'#FFCD30',
+    'psychic':'#FF549A',
+    'ice':'#78DEFF',
+    'dragon':'#7866EF',
+    'dark':'#785442',
+    'fairy':'#FFACFF',
+    'shadow':'#0E2E4C',
+}
+
+async function getAllNames(){
+    fetchJsonFromUrl('https://pokeapi.co/api/v2/pokemon/?limit=1118')
     let url = 'https://pokeapi.co/api/v2/pokemon/?limit=1118'
     let response = await fetch(url)
     let responseAsJson = await response.json()
@@ -35,16 +58,33 @@ async function renderSearchPokemon(id){
                                                 <img class="search-pokemon-image" src="${responseAsJson.sprites.versions['generation-v']['black-white'].animated['front_default']}">
                                                 <span class="bold font-size-12">N° ${id}</span>
                                                 <h3>${capitalizeFirstLetter(responseAsJson.name)}</h3>
+                                                ${getTypeContainers(responseAsJson.types)}
                                             </div>`
             
             updateSearchPokemons()
         })
 }
 
+async function fetchJsonFromUrl(url) {
+    return responseAsJson = await fetch(url).json
+}
+
+function getTypeContainers(typesArray){
+    let htmlToReturn = '<div class="row">'
+
+    for (let i = 0; i < typesArray.length; i++) {
+        htmlToReturn +=     `<div class="type-container" style="background: ${typeColors[typesArray[i].type.name]};">
+                                ${capitalizeFirstLetter(typesArray[i].type.name)}
+                            </div>`
+    }
+
+    return htmlToReturn + '</div>'
+}
+
 
 /** load new pokemons when bottom is reached */
 window.addEventListener('scroll', function(){
-    if(window.scrollY + 100 >= document.documentElement.scrollHeight - document.documentElement.clientHeight) {
+    if(window.scrollY + 100 >= document.documentElement.scrollHeight - document.documentElement.clientHeight && currentlyShowingAmount == maxPokemonIdToShow) {
         maxPokemonIdToShow += 30
         updateSearchPokemons()
     }
