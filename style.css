@@ -13,6 +13,10 @@ body {
     font-family: 'Outfit', sans-serif;
     display: flex;
     justify-content: center;
+    background-image: url(src/pokeball-icon.png);
+    background-repeat: no-repeat;
+    background-position-x: -180px;
+    background-position-y: -80px;
 }
 
 h1, h2, h3, h4 {
@@ -81,9 +85,24 @@ input {
     opacity: 0.8;
 }
 
+.loading-ball {
+    height: 60px;
+    filter: brightness(80%);
+    animation: rotatePokeBall ease-in-out 3s infinite;
+    margin: 40px;
+    width: 90%;
+    object-fit: contain;
+}
+
+@keyframes rotatePokeBall {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 /*List Container*/
 #pokedex-list {
     width: 100%;
+    margin-right: 350px;
 }
 
 /*Search*/
@@ -149,4 +168,21 @@ input {
     width: 350px;
     margin: 10px;
     margin-top: 150px;
+    position: fixed;
+    right: calc(10vw - 50px);
+    height: calc(100% - 255px);
+    align-items: center;
+    padding: 0 5px;
+    padding-top: 80px;
+    text-align: center;
+}
+
+#current-pokemon-image {
+    position: absolute;
+    height: 192px;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    top: -120px;
 }
