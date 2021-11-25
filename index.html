@@ -6,10 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PokeDex</title>
     <script src="./javascript/setup.js"></script>
+    <script src="./javascript/pokemon-list.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 </head>
-<body onload="setup()" class="row">
+<body onload="getAllNames()" class="row">
+    <!--Setup Loading Div-->
+    <div id="loading-div">
+        <img src="src/pokeball-icon.png" class="loading-ball">
+    </div>
+
+    <!--Search Bar and render search pokemon-->
     <div id="pokedex-list" class="column">
 
         <!--Search Bar-->
@@ -27,6 +34,7 @@
 
     </div>
 
+    <!--current selected pokemon-->
     <div id="current-pokemon-container" class="container column">
         <img id="current-pokemon-image" src="src/no-pokemon-selected-image.png">
         <span class="bold font-size-12">#213</span>

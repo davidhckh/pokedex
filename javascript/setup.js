@@ -1,10 +1,6 @@
 let types = {}
 let pokemons = [' ']
 
-function setup() {
-    getAllNames()
-}
-
 async function getAllNames() {
     let url = 'https://pokeapi.co/api/v2/pokemon/?limit=1118'
     let response = await fetch(url)
@@ -41,5 +37,13 @@ async function getAllTypes() {
 }
 
 function loadingCompletion() {
+    const loadingDiv = document.getElementById('loading-div')
+    loadingDiv.classList.add('hideLoading')
 
+    setTimeout(function() {
+        loadingDiv.classList.replace('hideLoading', 'hide')
+        document.body.style.overflow = 'unset'
+    }, 500)
+
+    updatePokemonList()
 }

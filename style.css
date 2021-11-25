@@ -17,6 +17,7 @@ body {
     background-repeat: no-repeat;
     background-position-x: -180px;
     background-position-y: -80px;
+    overflow: hidden;
 }
 
 h1, h2, h3, h4 {
@@ -97,6 +98,27 @@ input {
 @keyframes rotatePokeBall {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+#loading-div {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    background-color: white; 
+}
+
+.hideLoading {
+    animation: hideLoading ease-in-out 0.5s;
+    animation-fill-mode: forwards; 
+}
+
+@keyframes hideLoading {
+    0% {top: 0}
+    100% {top: -100vh;}
 }
 
 /*List Container*/
