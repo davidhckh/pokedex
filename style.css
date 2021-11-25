@@ -73,10 +73,10 @@ input {
 .type-container {
     border-radius: 5px;
     padding: 3px 7px;
-    color: white;
+    color: black;
     margin: 5px;
     margin-top: 10px;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 14px;
     opacity: 0.8;
 }
@@ -124,16 +124,24 @@ input {
     position: relative;
     cursor: pointer;
     border: 2px solid white;
-    transition: all .125s ease-in-out;
+    transition-duration: 100ms;
+    border: 2px solid white;
 }
 
 .pokemon-render-result-container:hover {
-    border: 2px solid #AAC6FF;
+    border: 2px solid #e0e0e0;
+}
+
+.pokemon-render-result-container:hover .search-pokemon-image {
+    transform: scale(1.15);
 }
 
 .search-pokemon-image {
     position: absolute;
-    bottom: 120px;
+    top: -55px;
+    image-rendering: pixelated;
+    image-resolution: 96px;
+    transition-duration: 100ms;
 }
 
 /*Current Pokemon*/

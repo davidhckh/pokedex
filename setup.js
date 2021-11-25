@@ -55,10 +55,10 @@ async function renderSearchPokemon(id){
             const renderContainer = document.getElementById('pokedex-list-render-container')
 
             renderContainer.innerHTML +=    `<div class="pokemon-render-result-container container center column">
-                                                <img class="search-pokemon-image" src="${responseAsJson.sprites.versions['generation-v']['black-white'].animated['front_default']}">
+                                                <img class="search-pokemon-image" src="${responseAsJson.sprites.versions['generation-v']['black-white']['front_default']}">
                                                 <span class="bold font-size-12">N° ${id}</span>
                                                 <h3>${capitalizeFirstLetter(responseAsJson.name)}</h3>
-                                                ${getTypeContainers(responseAsJson.types)}
+                                                ${getTypeContainers(responseAsJson.types)} 
                                             </div>`
             
             updateSearchPokemons()
@@ -81,11 +81,19 @@ function getTypeContainers(typesArray){
     return htmlToReturn + '</div>'
 }
 
+function increasePokemonToShow(by) {
+    if(maxPokemonIdToShow + by < 889) {
+        maxPokemonIdToShow += by
+    } else {
+        maxPokemonIdToShow = 889
+    }
+}
+
 
 /** load new pokemons when bottom is reached */
 window.addEventListener('scroll', function(){
-    if(window.scrollY + 100 >= document.documentElement.scrollHeight - document.documentElement.clientHeight && currentlyShowingAmount == maxPokemonIdToShow) {
-        maxPokemonIdToShow += 30
+    if(window.scrollY + 100 >= document.documentElement.scrollHeight - document.documentElement.clientHeight && currentlyShowingAmount + minPokemonIdToShow >= maxPokemonIdToShow) {
+        increasePokemonToShow(30)
         updateSearchPokemons()
     }
 })
@@ -93,5 +101,9 @@ window.addEventListener('scroll', function(){
 
 /**capitalize first letter (mainly for payload) */
 function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    var splitStr = string.toLowerCase().split(' ')
+    for (var i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1).replaceAll('-m', ' <i class="fas fa-mars"></i>').replaceAll('-f', ' <i class="fas fa-venus"></i>')
+    }
+    return splitStr.join(' ')
 }
