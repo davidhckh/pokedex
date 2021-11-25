@@ -25,8 +25,6 @@ const typeColors = {
 }
 
 function updatePokemonList() {
-    const renderContainer = document.getElementById('pokedex-list-render-container')
-
     if(currentlyShowingAmount + minPokemonIdToShow <= maxPokemonIdToShow) {
         renderPokemonListItem(minPokemonIdToShow + currentlyShowingAmount)
     }
