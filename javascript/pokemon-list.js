@@ -31,12 +31,12 @@ function updatePokemonList() {
 }
 
 function renderPokemonListItem(id) {
-    document.getElementById('pokedex-list-render-container').insertAdjacentHTML('beforeend', `<div class="pokemon-render-result-container container center column">
-    <img class="search-pokemon-image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png">
-    <span class="bold font-size-12">N° ${id}</span>
-    <h3>${dressUpPayloadValue(pokemons[id].name)}</h3>
-    ${getTypeContainers(pokemons[id].types)}
-</div>`)
+    document.getElementById('pokedex-list-render-container').insertAdjacentHTML('beforeend',    `<div onclick="openInfo(${id})" class="pokemon-render-result-container container center column">
+                                                                                                    <img class="search-pokemon-image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png">
+                                                                                                    <span class="bold font-size-12">N° ${id}</span>
+                                                                                                    <h3>${dressUpPayloadValue(pokemons[id].name)}</h3>
+                                                                                                    ${getTypeContainers(pokemons[id].types)}
+                                                                                                </div>`)
 
     currentlyShowingAmount += 1
 
@@ -65,6 +65,14 @@ function increasePokemonToShow(by) {
 
 
 
+/**add new pokemons when scroll bottom is reached */
+window.addEventListener('scroll', function(){
+    if(window.scrollY + 100 >= document.documentElement.scrollHeight - document.documentElement.clientHeight && currentlyShowingAmount + minPokemonIdToShow >= maxPokemonIdToShow) {
+        increasePokemonToShow(30)
+        updatePokemonList()
+    }
+})
+
 
 
 
@@ -78,11 +86,3 @@ function dressUpPayloadValue(string) {
     }
     return splitStr.join(' ')
 }
-
-/**add new pokemons when scroll bottom is reached */
-window.addEventListener('scroll', function(){
-    if(window.scrollY + 100 >= document.documentElement.scrollHeight - document.documentElement.clientHeight && currentlyShowingAmount + minPokemonIdToShow >= maxPokemonIdToShow) {
-        increasePokemonToShow(30)
-        updatePokemonList()
-    }
-})
