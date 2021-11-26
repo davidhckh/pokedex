@@ -31,12 +31,12 @@ function updatePokemonList() {
 }
 
 function renderPokemonListItem(id) {
-    document.getElementById('pokedex-list-render-container').innerHTML +=      `<div class="pokemon-render-result-container container center column">
-                                                                                    <img class="search-pokemon-image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png">
-                                                                                    <span class="bold font-size-12">N° ${id}</span>
-                                                                                    <h3>${dressUpPayloadValue(pokemons[id].name)}</h3>
-                                                                                    ${getTypeContainers(pokemons[id].types)}
-                                                                                </div>`
+    document.getElementById('pokedex-list-render-container').insertAdjacentHTML('beforeend', `<div class="pokemon-render-result-container container center column">
+    <img class="search-pokemon-image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png">
+    <span class="bold font-size-12">N° ${id}</span>
+    <h3>${dressUpPayloadValue(pokemons[id].name)}</h3>
+    ${getTypeContainers(pokemons[id].types)}
+</div>`)
 
     currentlyShowingAmount += 1
 
@@ -56,10 +56,10 @@ function getTypeContainers(typesArray){
 }
 
 function increasePokemonToShow(by) {
-    if(maxPokemonIdToShow + by < 889) {
+    if(maxPokemonIdToShow + by < 898) {
         maxPokemonIdToShow += by
     } else {
-        maxPokemonIdToShow = 889
+        maxPokemonIdToShow = 898
     }
 }
 
