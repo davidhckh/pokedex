@@ -39,12 +39,34 @@
 
         <!--Info-->
         <div id="current-pokemon-info" class="hide">
+            <!--Id-->
             <span id="current-pokemon-id" class="bold font-size-12">#213</span>
+            <!--name-->
             <h2 id="current-pokemon-name">Pikachu</h2>
-            <div class="type-container" style="background: #2F9AFF">Water</div>
+            <!--types-->
+            <div id="current-pokemon-types" class="row center"></div>
+            <!--description-->
             <h4>Pokedex Entry</h4>
-            <span>It swims as fast as a jet boat. The edges of its wings are sharp and can slice apart drifting ice.</span>
-            <h4>Abilities</h4>
+            <span id="current-pokemon-description"></span>
+            <!--height and weight-->
+            <div class="row center">
+                <div class="width-100 column center margin-5">
+                    <h4>Height</h4>
+                    <div  id="current-pokemon-height" class="pokemon-info-variable-container"></div>
+                </div>
+                <div class="width-100 column center margin-5">
+                    <h4>Weight</h4>
+                    <div id="current-pokemon-weight" class="pokemon-info-variable-container"></div>
+                </div>
+            </div>
+            <!--abilities-->
+            <div class="column">
+                <h4>Abilities</h4>
+                <div class="row">
+                    <div id="current-pokemon-abilitiy-0" class="pokemon-info-variable-container"></div>
+                    <div id="current-pokemon-abilitiy-1" class="pokemon-info-variable-container"></div>
+                </div>
+            </div>
         </div>
 
         <!--Empty-->
