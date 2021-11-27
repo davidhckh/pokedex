@@ -30,6 +30,14 @@ function updatePokemonList() {
     }
 }
 
+function increasePokemonToShow(by) {
+    if(maxPokemonIdToShow + by < 898) {
+        maxPokemonIdToShow += by
+    } else {
+        maxPokemonIdToShow = 898
+    }
+}
+
 function renderPokemonListItem(id) {
     document.getElementById('pokedex-list-render-container').insertAdjacentHTML('beforeend',    `<div onclick="openInfo(${id})" class="pokemon-render-result-container container center column">
                                                                                                     <img class="search-pokemon-image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png">
@@ -55,15 +63,6 @@ function getTypeContainers(typesArray){
     return htmlToReturn + '</div>'
 }
 
-function increasePokemonToShow(by) {
-    if(maxPokemonIdToShow + by < 898) {
-        maxPokemonIdToShow += by
-    } else {
-        maxPokemonIdToShow = 898
-    }
-}
-
-
 
 /**add new pokemons when scroll bottom is reached */
 window.addEventListener('scroll', function(){
@@ -72,10 +71,6 @@ window.addEventListener('scroll', function(){
         updatePokemonList()
     }
 })
-
-
-
-
 
 
 function dressUpPayloadValue(string) {

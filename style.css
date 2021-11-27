@@ -198,11 +198,11 @@ input {
 
 /*Current Pokemon*/
 #current-pokemon-container {
-    width: 350px;
+    width: 320px;
     margin: 10px;
     height: 82vh;
     position: fixed;
-    right: calc(10vw - 50px);
+    right: calc(10vw - 20px);
     padding: 0 15px;
     text-align: center;
     bottom: 0;
@@ -250,6 +250,30 @@ input {
     margin: 5px;
 }
 
+.current-pokemon-stats-container {
+    background: #F6F8FC;
+    display: flex;
+    padding: 5px;
+    border-radius: 30px;
+    margin: 5px;
+}
+
+.current-pokemon-stats-container h5 {
+    margin: 6px 0;
+}
+
+.current-pokemon-stats-name {
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+}
+
 
 .slide-out {
     animation: slideOut ease-in-out 0.35s;
@@ -262,13 +286,13 @@ input {
 }
 
 @keyframes slideOut {
-    0% {right: calc(10vw - 50px)}
+    0% {right: calc(10vw - 20px)}
     100% {right: -400px}
 }
 
 @keyframes slideIn {
     0% {right: -400px}
-    100% {right: calc(10vw - 50px)}
+    100% {right: calc(10vw - 20px)}
 }
 
 @media(max-width: 1150px) {
