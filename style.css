@@ -15,7 +15,6 @@ html {
 body {
     background: #F6F8FC;
     padding: 0 10vw;
-    height: 100vh;
     font-family: 'Outfit', sans-serif;
     display: flex;
     justify-content: center;
@@ -23,7 +22,6 @@ body {
     background-repeat: no-repeat;
     background-position-x: -180px;
     background-position-y: -80px;
-    overflow: hidden;
 }
 
 h1, h2, h3, h4 {
@@ -67,9 +65,6 @@ span {
     width: 100%;
 }
 
-.bold {
-    font-weight: bold;
-}
 
 .container {
     border-radius: 20px;
@@ -91,6 +86,10 @@ input {
 
 .hide {
     display: none !important;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 .type-container {
@@ -122,8 +121,7 @@ input {
 
 /*Search*/
 #search-bar-container {
-    margin: 40px 10px;
-    height: 50px;
+    margin: 30px 10px;
 }
 
 #start-search-button {
@@ -159,7 +157,6 @@ input {
     cursor: pointer;
     border: 2px solid white;
     transition-duration: 100ms;
-    border: 2px solid white;
 }
 
 .pokemon-render-result-container:hover {
@@ -174,7 +171,6 @@ input {
     position: absolute;
     top: -55px;
     image-rendering: pixelated;
-    image-resolution: 96px;
     transition-duration: 100ms;
 }
 
@@ -203,14 +199,15 @@ input {
 #current-pokemon-container {
     width: 350px;
     margin: 10px;
-    height: 85vh;
+    height: 82vh;
     position: fixed;
     right: calc(10vw - 50px);
-    height: calc(100% - 180px);
-    align-items: center;
     padding: 0 15px;
     text-align: center;
-    bottom: -3vh;
+    bottom: 0;
+    margin-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 #current-pokemon-info {
@@ -223,12 +220,13 @@ input {
     position: absolute;
     right: 0;
     left: 0;
-    top: -120px;
+    bottom: 78vh;
     margin-right: auto;
     margin-left: auto;
     object-fit: contain;
     image-rendering: pixelated;
     max-width: 350px;
+    max-height: 22vh;
 }
 
 #current-pokemon-loading {
@@ -294,8 +292,6 @@ input {
 
 @media(max-width: 380px) {
     .pokemon-render-result-container {
-        margin-right: 0;
-        margin-left: 0;
         flex: unset;
         width: 100%;
     }

@@ -50,30 +50,20 @@ function setupPokemonInfo(pokemon, species, evolutions) {
         }
     }
 
-    console.log(pokemon)
+    //console.log(pokemon)
+    //console.log(species)
+    //console.log(evolutions)
 }
 
 
 function updateCurrentPokemonImage(id) {
-    /** make some height and top style changes to adjust to varying sprite aspect ratios*/
+    /**adjust height to varying sprite dimensions ---> (to position directly above info) */
     const currentPokemonImage = document.getElementById('current-pokemon-image')
-    document.getElementById('current-pokemon-image').classList.remove('hide')
     const img = new Image()
 
     img.onload = function() {
         currentPokemonImage.src = this.src
-
-        currentPokemonImage.style.width = this.width * 3 + 'px'
-
-        const maxHeight = (window.innerHeight * 0.25) + 40
-
-        if(this.height * 3 <= maxHeight) {
-            currentPokemonImage.style.height = this.height * 3 + 'px'
-            currentPokemonImage.style.top = 40 - (this.height * 3) + 'px'
-        } else {
-            currentPokemonImage.style.height = maxHeight + 'px'
-            currentPokemonImage.style.top =  40 - maxHeight + 'px'
-        }
+        currentPokemonImage.style.height = this.height * 3 + 'px'
     }
 
     if(id >= 650) {

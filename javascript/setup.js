@@ -1,4 +1,3 @@
-let types = {}
 let pokemons = [' ']
 
 async function getAllNames() {
