@@ -14,7 +14,6 @@ async function fetchPokemonInfo(id) {
     const urlSpecies = 'https://pokeapi.co/api/v2/pokemon-species/' + id
     const responsePokemon = await fetch(urlPokemon)
     const responseSpecies = await fetch(urlSpecies)
-    
     const pokemon = await responsePokemon.json()
     const species = await responseSpecies.json()
 
@@ -25,6 +24,7 @@ async function fetchPokemonInfo(id) {
     setupPokemonStats(pokemon)
     setupPokemonAbilities(pokemon)
     setupEvolutionChain(evolution_chain)
+
     slideInPokemonInfo()
 }
 
@@ -83,8 +83,49 @@ function setupPokemonAbilities(pokemon) {
 
 }
 
-function setupEvolutionChain(evolution_chain) {
+function setupEvolutionChain(evolutionChain) {
+    const chain = evolutionChain.chain
 
+    const chainContainer =  document.getElementById('current-pokemon-evolution-chain-container')
+    const chainImages = [document.getElementById('current-pokemon-evolution-0'), document.getElementById('current-pokemon-evolution-1'), document.getElementById('current-pokemon-evolution-2')]
+    const chainLevels = [document.getElementById('current-pokemon-evolution-level-0'), document.getElementById('current-pokemon-evolution-level-1')]
+
+    if(chain.evolves_to.length != 0) {
+        chainContainer.classList.remove('hide')
+
+        setupEvolution(chain, 0)
+
+        if(chain.evolves_to[0].evolves_to.length != 0) {
+            setupEvolution(chain.evolves_to[0], 1)
+            chainImages[2].classList.remove('hide')
+            chainLevels[1].classList.remove('hide')
+        } else {
+            chainImages[2].classList.add('hide')
+            chainLevels[1].classList.add('hide')
+        }
+    } else {
+        chainContainer.classList.add('hide')
+    }
+}
+
+function setupEvolution(chain, no) {
+    const chainImages = [document.getElementById('current-pokemon-evolution-0'), document.getElementById('current-pokemon-evolution-1'), document.getElementById('current-pokemon-evolution-2')]
+    const chainLevels = [document.getElementById('current-pokemon-evolution-level-0'), document.getElementById('current-pokemon-evolution-level-1')]
+
+    chainImages[no].src= 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + filterIdFromSpeciesURL(chain.species.url) + '.png'
+    chainImages[no].setAttribute('onClick', 'javascript: ' + 'openInfo(' + filterIdFromSpeciesURL(chain.species.url) + ')')
+    chainImages[no + 1].src= 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + filterIdFromSpeciesURL(chain.evolves_to[0].species.url) + '.png'
+    chainImages[no + 1].setAttribute('onClick', 'javascript: ' + 'openInfo(' + filterIdFromSpeciesURL(chain.evolves_to[0].species.url) + ')')
+
+    if(chain.evolves_to[0].evolution_details[0].min_level) {
+        chainLevels[no].innerHTML = 'Lv. ' + chain.evolves_to[0].evolution_details[0].min_level
+    } else {
+        chainLevels[no].innerHTML = '?'
+    }
+}
+
+function filterIdFromSpeciesURL(url){
+    return url.replace('https://pokeapi.co/api/v2/pokemon-species/', '').replace('/', '')
 }
 
 

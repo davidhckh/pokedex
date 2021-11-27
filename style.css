@@ -66,7 +66,6 @@ span {
     width: 100%;
 }
 
-
 .container {
     border-radius: 20px;
     box-shadow: #EDEDED 0 10px 10px;
@@ -272,6 +271,25 @@ input {
     justify-content: center;
     align-items: center;
     font-size: 10px;
+}
+
+.current-pokemon-evolution-image {
+    height: 74px;
+    width: 74px;
+    cursor: pointer;
+    border-radius: 30%;
+}
+
+.current-pokemon-evolution-image:hover{
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.current-pokemon-evolution-level-container {
+    width: 50px;
+    background-color: #F6F8FC;
+    padding: 8px 0;
+    border-radius: 30px;
+    margin: 5px;
 }
 
 
