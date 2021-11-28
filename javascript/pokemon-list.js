@@ -32,8 +32,6 @@ function updatePokemonList() {
 
 function renderPokemonListItem(index) {
     if (currentList[index]) {
-        console.log(currentList[index] )
-
         document.getElementById('pokedex-list-render-container').insertAdjacentHTML('beforeend', `<div onclick="openInfo(${currentList[index].id})" class="pokemon-render-result-container container center column">
                                                                                                     <img class="search-pokemon-image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${currentList[index].id}.png">
                                                                                                     <span class="bold font-size-12">N° ${currentList[index].id}</span>
@@ -47,7 +45,7 @@ function renderPokemonListItem(index) {
     }
 }
 
-function increasePokemonToShow(by) {
+function increaseMaxIndex(by) {
     if (maxIndex + by <= currentList.length) {
         maxIndex += by
     } else {
@@ -70,13 +68,11 @@ function getTypeContainers(typesArray) {
 
 function search() {
     setTimeout(function () {
-        const input = document.getElementById('search-input')
-        const search = input.value.toLowerCase()
         let searchResults = []
 
         for (let i = 0; i < pokemons.length; i++) {
             if (pokemons[i].name) {
-                if (pokemons[i].name.includes(search)) {
+                if (pokemons[i].name.includes(document.getElementById('search-input').value.toLowerCase())) {
                     searchResults.push(pokemons[i])
                 }
             }
@@ -86,27 +82,41 @@ function search() {
 
         currentList = searchResults
         currentlyShowingAmount = 0
+        maxIndex = 0
 
-        if (searchResults.length <= 30) {
-            maxIndex = searchResults.length
-        } else {
-            maxIndex = 30
-        }
-
+        increaseMaxIndex(30)
         updatePokemonList()
     }, 1)
 }
 
 
-/**add new pokemons when scroll bottom is reached */
+/** Scroll */
 window.addEventListener('scroll', function () {
-    if (window.scrollY + 100 >= document.documentElement.scrollHeight - document.documentElement.clientHeight) {
-        increasePokemonToShow(30)
-        updatePokemonList()
-    }
+    addNewScrollPokemon()
+    updateBackToTopVisibility()
 })
 
+function addNewScrollPokemon() {
+    if (window.scrollY + 100 >= document.documentElement.scrollHeight - document.documentElement.clientHeight) {
+        increaseMaxIndex(30)
+        updatePokemonList()
+    }
+}
 
+function updateBackToTopVisibility() {
+    if(window.scrollY > window.innerHeight) {
+        document.getElementById('back-to-top-button').classList.remove('hide')
+    } else {
+        document.getElementById('back-to-top-button').classList.add('hide')
+    }
+}
+
+function backToTop() {
+    window.scrollTo(0, 0)
+}
+
+
+/**dress up payload value */
 function dressUpPayloadValue(string) {
     var splitStr = string.toLowerCase().split(' ')
     var splitStr = string.toLowerCase().split('-')

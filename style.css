@@ -151,7 +151,7 @@ input {
 }
 
 .pokemon-render-result-container {
-    flex: 1;
+    flex: 0.5;
     min-width: 20%;
     margin: 10px;
     margin-top: 60px;
@@ -242,7 +242,7 @@ input {
 
 #current-pokemon-loading {
     position: fixed;
-    right: calc(10vw - 40px);
+    right: calc(10vw - 10px);
     object-fit: contain;
     width: 350px;
     top: 175px;
@@ -327,6 +327,32 @@ input {
 }
 
 
+/*Back to top*/
+#back-to-top-button {
+    background-color: white;
+    box-shadow: #EDEDED 0 10px 10px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    z-index: 3;
+}
+
+#back-to-top-button:hover {
+    opacity: 0.5;
+}
+
+#back-to-top-button img {
+    height: 16px;
+}
+
+
 
 
 /*Responsive*/
@@ -352,6 +378,7 @@ input {
     display: none ;
     height: 22px;
     transition: 0.35s;
+    box-shadow: #EDEDED 0 10px 10px;
 }
 
 @media(max-width: 1100px) {
