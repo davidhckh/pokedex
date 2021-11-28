@@ -72,7 +72,7 @@ function search() {
 
         for (let i = 0; i < pokemons.length; i++) {
             if (pokemons[i].name) {
-                if (pokemons[i].name.includes(document.getElementById('search-input').value.toLowerCase())) {
+                if (pokemons[i].name.replaceAll('-', ' ').includes(document.getElementById('search-input').value.toLowerCase())) {
                     searchResults.push(pokemons[i])
                 }
             }
