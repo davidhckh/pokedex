@@ -6,12 +6,12 @@ function openInfo(index) {
         slideOutPokemonInfo();
 
         setTimeout(function(){
-            fetchPokemonInfo(pokemons[index].id);
-            updateCurrentPokemonImage(pokemons[index].id);
+            fetchPokemonInfo(currentList[index].id);
+            updateCurrentPokemonImage(currentList[index].id);
         }, 350);
     } else {
-        fetchPokemonInfo(pokemons[index].id);
-        updateCurrentPokemonImage(pokemons[index].id);
+        fetchPokemonInfo(currentList[index].id);
+        updateCurrentPokemonImage(currentList[index].id);
     };
 };
 
@@ -51,8 +51,10 @@ function updateCurrentPokemonImage(index) {
         currentPokemonImage.style.height = this.height * 3 + 'px';
     };
 
+    console.log(pokemons[index].id)
+
     if(pokemons[index].id >= 650) {
-        img.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/' + (pokemons[index].id) - 1 + '.png';
+        img.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/' + (pokemons[index].id - 1) + '.png';
     } else {
         img.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/' + (pokemons[index].id - 1) + '.gif';
     };
