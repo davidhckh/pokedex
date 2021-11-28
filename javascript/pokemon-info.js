@@ -1,24 +1,24 @@
 /**open info when pokemon from list is clicked */
-function openInfo(index) {
+function openInfo(id) {
     document.getElementById('current-pokemon-empty').classList.add('hide');
 
     if(window.innerWidth > 1100){
         slideOutPokemonInfo();
 
         setTimeout(function(){
-            fetchPokemonInfo(currentList[index].id);
-            updateCurrentPokemonImage(currentList[index].id);
+            fetchPokemonInfo(id);
+            updateCurrentPokemonImage(id);
         }, 350);
     } else {
-        fetchPokemonInfo(currentList[index].id);
-        updateCurrentPokemonImage(currentList[index].id);
+        fetchPokemonInfo(id);
+        updateCurrentPokemonImage(id);
     };
 };
 
 /**fetch pokemon infos */
-async function fetchPokemonInfo(index) {
-    const urlPokemon = 'https://pokeapi.co/api/v2/pokemon/' + (pokemons[index].id - 1);
-    const urlSpecies = 'https://pokeapi.co/api/v2/pokemon-species/' + (pokemons[index].id - 1);
+async function fetchPokemonInfo(id) {
+    const urlPokemon = 'https://pokeapi.co/api/v2/pokemon/' + id;
+    const urlSpecies = 'https://pokeapi.co/api/v2/pokemon-species/' + id;
     const responsePokemon = await fetch(urlPokemon);
     const responseSpecies = await fetch(urlSpecies);
     const pokemon = await responsePokemon.json();
@@ -27,7 +27,7 @@ async function fetchPokemonInfo(index) {
     const reponseEvolutions = await fetch(species.evolution_chain.url);
     const evolution_chain = await reponseEvolutions.json();
 
-    setupPokemonAbout(pokemon, index, species);
+    setupPokemonAbout(pokemon, id, species);
     setupPokemonStats(pokemon);
     setupPokemonAbilities(pokemon);
     setupEvolutionChain(evolution_chain);
@@ -41,7 +41,7 @@ async function fetchPokemonInfo(index) {
 };
 
 /**update pokemon image & adjust height to varying sprite dimensions ---> (to position directly above info) */
-function updateCurrentPokemonImage(index) {
+function updateCurrentPokemonImage(id) {
 
     const currentPokemonImage = document.getElementById('current-pokemon-image');
     const img = new Image();
@@ -51,21 +51,19 @@ function updateCurrentPokemonImage(index) {
         currentPokemonImage.style.height = this.height * 3 + 'px';
     };
 
-    console.log(pokemons[index].id)
-
-    if(pokemons[index].id >= 650) {
-        img.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/' + (pokemons[index].id - 1) + '.png';
+    if(id >= 650) {
+        img.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/' + id + '.png';
     } else {
-        img.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/' + (pokemons[index].id - 1) + '.gif';
+        img.src = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/' + id + '.gif';
     };
 };
 
 /**setup pokemon id, name, types, height, weight and description */
-function setupPokemonAbout(pokemon, index, species) {
+function setupPokemonAbout(pokemon, id, species) {
     document.getElementById('current-pokemon-info').classList.remove('hide');
     document.getElementById('current-pokemon-id').innerHTML = 'N° ' + pokemon.id;
     document.getElementById('current-pokemon-name').innerHTML = dressUpPayloadValue(pokemon.name);
-    document.getElementById('current-pokemon-types').innerHTML = getTypeContainers(pokemons[index - 1].types);
+    document.getElementById('current-pokemon-types').innerHTML = getTypeContainers(pokemons[id - 1].types);
     document.getElementById('current-pokemon-height').innerHTML = pokemon.height / 10 + 'm';
     document.getElementById('current-pokemon-weight').innerHTML = pokemon.weight / 10 + 'kg';
 
@@ -130,6 +128,7 @@ function setupEvolution(chain, no) {
     const chainImages = [document.getElementById('current-pokemon-evolution-0'), document.getElementById('current-pokemon-evolution-1'), document.getElementById('current-pokemon-evolution-2')];
     const chainLevels = [document.getElementById('current-pokemon-evolution-level-0'), document.getElementById('current-pokemon-evolution-level-1')];
 
+    console.log(filterIdFromSpeciesURL(chain.species.url))
     chainImages[no].src= 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + filterIdFromSpeciesURL(chain.species.url) + '.png';
     chainImages[no].setAttribute('onClick', 'javascript: ' + 'openInfo(' + filterIdFromSpeciesURL(chain.species.url) + ')');
     chainImages[no + 1].src= 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + filterIdFromSpeciesURL(chain.evolves_to[0].species.url) + '.png';
