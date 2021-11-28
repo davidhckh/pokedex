@@ -1,12 +1,17 @@
 function openInfo(id) {
     document.getElementById('current-pokemon-empty').classList.add('hide')
 
-    slideOutPokemonInfo()
+    if(window.innerWidth > 1100){
+        slideOutPokemonInfo()
 
-    setTimeout(function(){
+        setTimeout(function(){
+            fetchPokemonInfo(id)
+            updateCurrentPokemonImage(id)
+        }, 350)
+    } else {
         fetchPokemonInfo(id)
         updateCurrentPokemonImage(id)
-    }, 350)
+    }
 }
 
 async function fetchPokemonInfo(id) {
@@ -24,8 +29,13 @@ async function fetchPokemonInfo(id) {
     setupPokemonStats(pokemon)
     setupPokemonAbilities(pokemon)
     setupEvolutionChain(evolution_chain)
+    setupResponsiveBackground(pokemon)
 
     slideInPokemonInfo()
+        
+    if(window.innerWidth < 1100){
+        openPokemonResponsiveInfo()
+    }
 }
 
 function updateCurrentPokemonImage(id) {
@@ -124,9 +134,54 @@ function setupEvolution(chain, no) {
     }
 }
 
+
 function filterIdFromSpeciesURL(url){
     return url.replace('https://pokeapi.co/api/v2/pokemon-species/', '').replace('/', '')
 }
+
+
+
+/**------------------------- Responsive ---------------------------------------------------------------- */
+function setupResponsiveBackground(pokemon) {
+    document.getElementById('current-pokemon-responsive-background').style.background= typeColors[pokemon.types[0].type.name]
+}
+
+function openPokemonResponsiveInfo(){
+    document.getElementById('current-pokemon-container').classList.remove('hide')
+    document.getElementById('current-pokemon-container').style.display = 'flex'
+    document.getElementById('current-pokemon-responsive-close').classList.remove('hide')
+    
+    document.getElementById('current-pokemon-responsive-background').classList.remove('hide')
+
+    document.getElementById('current-pokemon-responsive-background').style.opacity = 0
+    setTimeout(function(){
+        document.getElementById('current-pokemon-responsive-background').style.opacity = 1
+    }, 20)
+}
+
+function closePokemonInfo(){
+    setTimeout(function(){
+        document.getElementById('current-pokemon-container').classList.add('hide')
+        document.getElementById('current-pokemon-responsive-close').classList.add('hide')
+        
+        document.getElementById('current-pokemon-responsive-background').classList.add('hide')
+    },350)
+
+    document.getElementById('current-pokemon-responsive-background').style.opacity = 1
+    setTimeout(function(){
+        document.getElementById('current-pokemon-responsive-background').style.opacity = 0
+    }, 10)
+    
+    slideOutPokemonInfo()
+}
+
+window.addEventListener('resize', function(){
+    if(document.getElementById('current-pokemon-container').classList.contains('slide-out')){
+        document.getElementById('current-pokemon-container').classList.replace('slide-out', 'slide-in')
+    }
+})
+
+
 
 
 /**------------------------- Animations ---------------------------------------------------------------- */
@@ -136,5 +191,6 @@ function slideOutPokemonInfo(){
 }
 
 function slideInPokemonInfo(){
-    document.getElementById('current-pokemon-container').classList.replace('slide-out', 'slide-in')
+    document.getElementById('current-pokemon-container').classList.add('slide-in')
+    document.getElementById('current-pokemon-container').classList.remove('slide-out')
 }
