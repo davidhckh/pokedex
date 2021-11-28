@@ -1,12 +1,13 @@
 let pokemons = [' ']
 
 async function getAllNames() {
-    let url = 'https://pokeapi.co/api/v2/pokemon/?limit=1118'
+    let url = 'https://pokeapi.co/api/v2/pokemon/?limit=898'
     let response = await fetch(url)
     let responseAsJson = await response.json()
 
     for (let i = 0; i < responseAsJson.results.length; i++) {
         pokemons.push({
+            id: i + 1,
             name: responseAsJson.results[i].name,
             types: []
         })
@@ -43,6 +44,9 @@ function loadingCompletion() {
         loadingDiv.classList.replace('hideLoading', 'hide')
         document.body.style.overflow = 'unset'
     }, 500)
+
+    pokemons.splice(0, 1)
+    currentList = pokemons
 
     updatePokemonList()
 }

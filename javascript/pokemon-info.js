@@ -63,7 +63,6 @@ function setupPokemonAbout(pokemon, species) {
     document.getElementById('current-pokemon-height').innerHTML = pokemon.height / 10 + 'm'
     document.getElementById('current-pokemon-weight').innerHTML = pokemon.weight / 10 + 'kg'
 
-    /**description */
     for(i = 0; i < species.flavor_text_entries.length; i++) {
         if(species.flavor_text_entries[i].language.name == 'en'){
             document.getElementById('current-pokemon-description').innerHTML = dressUpPayloadValue(species.flavor_text_entries[i].flavor_text.replace('', ' '))

@@ -23,11 +23,13 @@ body {
     background-repeat: no-repeat;
     background-position-x: -180px;
     background-position-y: -80px;
+    width: 100%
 }
 
 h1, h2, h3, h4 {
     color: #011030;
     margin: 5px;
+    text-align: center;
 }
 
 h4 {
@@ -117,6 +119,7 @@ input {
 /*List Container*/
 #pokedex-list {
     margin-right: 350px;
+    width: 100%;
 }
 
 /*Search*/

@@ -1,61 +1,66 @@
-let minPokemonIdToShow = 1
-let maxPokemonIdToShow = 30
 let currentlyShowingAmount = 0
+let maxIndex = 29
+let currentList = []
 
 const typeColors = {
-    'normal':'#BCBCAC',
-    'fighting':'#BC5442',
-    'flying':'#669AFF',
-    'poison':'#AB549A',
-    'ground':'#DEBC54',
-    'rock':'#BCAC66',
-    'bug':'#ABBC1C',
-    'ghost':'#6666BC',
-    'steel':'#ABACBC',
-    'fire':'#FF421C',
-    'water':'#2F9AFF',
-    'grass':'#78CD54',
-    'electric':'#FFCD30',
-    'psychic':'#FF549A',
-    'ice':'#78DEFF',
-    'dragon':'#7866EF',
-    'dark':'#785442',
-    'fairy':'#FFACFF',
-    'shadow':'#0E2E4C'
+    'normal': '#BCBCAC',
+    'fighting': '#BC5442',
+    'flying': '#669AFF',
+    'poison': '#AB549A',
+    'ground': '#DEBC54',
+    'rock': '#BCAC66',
+    'bug': '#ABBC1C',
+    'ghost': '#6666BC',
+    'steel': '#ABACBC',
+    'fire': '#FF421C',
+    'water': '#2F9AFF',
+    'grass': '#78CD54',
+    'electric': '#FFCD30',
+    'psychic': '#FF549A',
+    'ice': '#78DEFF',
+    'dragon': '#7866EF',
+    'dark': '#785442',
+    'fairy': '#FFACFF',
+    'shadow': '#0E2E4C'
 }
 
 function updatePokemonList() {
-    if(currentlyShowingAmount + minPokemonIdToShow <= maxPokemonIdToShow) {
-        renderPokemonListItem(minPokemonIdToShow + currentlyShowingAmount)
+    if (currentlyShowingAmount <= maxIndex) {
+        renderPokemonListItem(currentlyShowingAmount)
+    }
+}
+
+function renderPokemonListItem(index) {
+    if (currentList[index]) {
+        console.log(currentList[index] )
+
+        document.getElementById('pokedex-list-render-container').insertAdjacentHTML('beforeend', `<div onclick="openInfo(${currentList[index].id})" class="pokemon-render-result-container container center column">
+                                                                                                    <img class="search-pokemon-image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${currentList[index].id}.png">
+                                                                                                    <span class="bold font-size-12">N° ${currentList[index].id}</span>
+                                                                                                    <h3>${dressUpPayloadValue(currentList[index].name)}</h3>
+                                                                                                    ${getTypeContainers(currentList[index].types)}
+                                                                                                </div>`)
+
+        currentlyShowingAmount += 1
+
+        updatePokemonList()
     }
 }
 
 function increasePokemonToShow(by) {
-    if(maxPokemonIdToShow + by < 898) {
-        maxPokemonIdToShow += by
+    if (maxIndex + by <= currentList.length) {
+        maxIndex += by
     } else {
-        maxPokemonIdToShow = 898
+        maxIndex = currentList.length - 1
     }
 }
 
-function renderPokemonListItem(id) {
-    document.getElementById('pokedex-list-render-container').insertAdjacentHTML('beforeend',    `<div onclick="openInfo(${id})" class="pokemon-render-result-container container center column">
-                                                                                                    <img class="search-pokemon-image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png">
-                                                                                                    <span class="bold font-size-12">N° ${id}</span>
-                                                                                                    <h3>${dressUpPayloadValue(pokemons[id].name)}</h3>
-                                                                                                    ${getTypeContainers(pokemons[id].types)}
-                                                                                                </div>`)
 
-    currentlyShowingAmount += 1
-
-    updatePokemonList()
-}
-
-function getTypeContainers(typesArray){
+function getTypeContainers(typesArray) {
     let htmlToReturn = '<div class="row">'
 
     for (let i = 0; i < typesArray.length; i++) {
-        htmlToReturn +=     `<div class="type-container" style="background: ${typeColors[typesArray[i]]};">
+        htmlToReturn += `<div class="type-container" style="background: ${typeColors[typesArray[i]]};">
                                 ${dressUpPayloadValue(typesArray[i])}
                             </div>`
     }
@@ -63,10 +68,39 @@ function getTypeContainers(typesArray){
     return htmlToReturn + '</div>'
 }
 
+function search() {
+    setTimeout(function () {
+        const input = document.getElementById('search-input')
+        const search = input.value.toLowerCase()
+        let searchResults = []
+
+        for (let i = 0; i < pokemons.length; i++) {
+            if (pokemons[i].name) {
+                if (pokemons[i].name.includes(search)) {
+                    searchResults.push(pokemons[i])
+                }
+            }
+        }
+
+        document.getElementById('pokedex-list-render-container').innerHTML = ''
+
+        currentList = searchResults
+        currentlyShowingAmount = 0
+
+        if (searchResults.length <= 30) {
+            maxIndex = searchResults.length
+        } else {
+            maxIndex = 30
+        }
+
+        updatePokemonList()
+    }, 1)
+}
+
 
 /**add new pokemons when scroll bottom is reached */
-window.addEventListener('scroll', function(){
-    if(window.scrollY + 100 >= document.documentElement.scrollHeight - document.documentElement.clientHeight && currentlyShowingAmount + minPokemonIdToShow >= maxPokemonIdToShow) {
+window.addEventListener('scroll', function () {
+    if (window.scrollY + 100 >= document.documentElement.scrollHeight - document.documentElement.clientHeight) {
         increasePokemonToShow(30)
         updatePokemonList()
     }
