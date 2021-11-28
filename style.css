@@ -378,7 +378,10 @@ input {
     display: none ;
     height: 22px;
     transition: 0.35s;
-    box-shadow: #EDEDED 0 10px 10px;
+}
+
+#current-pokemon-responsive-close:hover {
+    opacity: 0.5;
 }
 
 @media(max-width: 1100px) {
