@@ -341,7 +341,7 @@ input {
     align-items: center;
     justify-content: center;
     border-radius: 15px;
-    z-index: 3;
+    z-index: 1;
 }
 
 #back-to-top-button:hover {
