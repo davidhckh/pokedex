@@ -95,7 +95,6 @@ function setupPokemonAbilities(pokemon) {
 
 function setupEvolutionChain(evolutionChain) {
     const chain = evolutionChain.chain
-
     const chainContainer =  document.getElementById('current-pokemon-evolution-chain-container')
     const chainImages = [document.getElementById('current-pokemon-evolution-0'), document.getElementById('current-pokemon-evolution-1'), document.getElementById('current-pokemon-evolution-2')]
     const chainLevels = [document.getElementById('current-pokemon-evolution-level-0'), document.getElementById('current-pokemon-evolution-level-1')]
@@ -107,6 +106,7 @@ function setupEvolutionChain(evolutionChain) {
 
         if(chain.evolves_to[0].evolves_to.length != 0) {
             setupEvolution(chain.evolves_to[0], 1)
+
             chainImages[2].classList.remove('hide')
             chainLevels[1].classList.remove('hide')
         } else {
@@ -157,6 +157,8 @@ function openPokemonResponsiveInfo(){
     setTimeout(function(){
         document.getElementById('current-pokemon-responsive-background').style.opacity = 1
     }, 20)
+
+    document.getElementsByTagName('html')[0].style.overflow = 'hidden'
 }
 
 function closePokemonInfo(){
@@ -172,12 +174,18 @@ function closePokemonInfo(){
         document.getElementById('current-pokemon-responsive-background').style.opacity = 0
     }, 10)
     
+    document.getElementsByTagName('html')[0].style.overflow = 'unset'
+
     slideOutPokemonInfo()
 }
 
 window.addEventListener('resize', function(){
     if(document.getElementById('current-pokemon-container').classList.contains('slide-out')){
         document.getElementById('current-pokemon-container').classList.replace('slide-out', 'slide-in')
+    }
+
+    if(window.innerWidth > 1100) {
+        document.getElementsByTagName('html')[0].style.overflow = 'unset'
     }
 })
 
