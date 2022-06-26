@@ -29,7 +29,7 @@ async function getAllTypes() {
         for(j = 0; j < pokemonInType.length; j++) {
             const pokemonId = pokemonInType[j].pokemon.url.replace('https://pokeapi.co/api/v2/pokemon/', '').replace('/', '');
 
-            if(pokemonId <= pokemons.length) {
+            if(pokemonId <= pokemons.length && pokemons[pokemonId]) {
                 pokemons[pokemonId].types.push(responseAsJson.name);
             };
         };
