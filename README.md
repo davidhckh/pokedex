@@ -1,4 +1,4 @@
-# Pokedex
+# Pokédex
 
 :pencil2: Made for practice
 
