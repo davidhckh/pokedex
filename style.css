@@ -433,24 +433,6 @@ input {
   #current-pokemon-loading {
     display: none;
   }
-
-  @keyframes slideOut {
-    0% {
-      bottom: 0;
-    }
-    100% {
-      bottom: -100vh;
-    }
-  }
-
-  @keyframes slideIn {
-    0% {
-      bottom: -100vh;
-    }
-    100% {
-      bottom: 0;
-    }
-  }
 }
 
 @media (min-width: 1100px) {
