@@ -1,8 +1,10 @@
 let pokemons = [" "];
 
+const TOTAL_POKEMONS = 1025;
+
 /**fetch pokemon name and id */
 async function getAllNames() {
-  let url = "https://pokeapi.co/api/v2/pokemon/?limit=1025";
+  let url = `https://pokeapi.co/api/v2/pokemon/?limit=${TOTAL_POKEMONS}`;
   let response = await fetch(url);
   let responseAsJson = await response.json();
 
